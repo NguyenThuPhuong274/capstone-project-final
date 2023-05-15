@@ -1,0 +1,18 @@
+export const ROUTE_CONSTANTS = {
+    HOME_PAGE: "/",
+    SIGN_IN: "/signin",
+    SIGN_UP: "/signup",
+    FORGOT_PASSOWRD: "/forgot-password",
+    ERROR_PAGE: "/error",
+    BLOG_PAGE: "/blogs",
+    COURSE_PAGE: "/courses",
+    SUPPORT_PAGE: "/support",
+    CONTACT_PAGE: "/contact",
+    ACCOUNT_PAGE: "/authen/account",
+    ADMIN_CONTACT_PAGE: "/authen/contacts",
+    ADMIN_BLOG_PAGE: "/authen/blogs",
+    ADMIN_COURSE_PAGE: "/authen/courses",
+    ADMIN_SUPPORT_PAGE: "/authen/supports",
+    ADMIN_CONTACT_PAGE: "/authen/contacts",
+    ADMIN_COURSE_DETAILS: "/authen/course-details",
+}
