@@ -1,13 +1,25 @@
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 
 const CourseCard = (props) => {
-  const { price, duration, description, title, level, img_url } = props;
+  const navigate = useNavigate();
+  const { price, duration, description, title, level, img_url, isBought } = props;
   const formattedPrice = price.toLocaleString('vi-VN', {
     style: 'currency',
     currency: 'VND',
   });
+
+  const handleGoToCourse = () => {
+    if(isBought === true) {
+      navigate(ROUTE_CONSTANTS.LESSON_VIEW_PAGE);
+
+    } else {
+
+      navigate(ROUTE_CONSTANTS.COURSE_DETAILS_PAGE);
+    }
+  }
   return (
-    <div  className="w-full h-full">
+    <div className="w-full h-full">
       <div
         className="wow h-full fadeInUp relative z-10 rounded-md bg-white px-8 py-10 shadow-signUp dark:bg-[#1D2144]"
         data-wow-delay=".1s"
@@ -17,32 +29,43 @@ const CourseCard = (props) => {
             <span className="amount">{formattedPrice}</span>
             <span className="time text-lg text-body-color"> / {duration} tháng</span>
           </h3>
-          <Link to={"/"} className="mb-2 rounded-3xl text-center p-2  bg-lime  text-xl font-bold text-black dark:text-white">
+          <Link to={ROUTE_CONSTANTS.COURSE_DETAILS_PAGE}
+            className="mb-2 rounded-3xl text-center p-2  bg-lime  text-xl font-bold text-black dark:text-white">
             N{level}
           </Link>
         </div>
-        <Link to="/" className="relative block h-[260px] w-full mb-5">    
-          <img src={img_url} className="object-fill w-full h-[270px]" alt="image" />
+        <Link to={ROUTE_CONSTANTS.COURSE_DETAILS_PAGE} className="relative block h-[230px] w-full mb-5">
+          <img src={img_url} className="object-fill w-full h-[230px]" alt="image" />
         </Link>
         <h3>
-            <Link
-              to="/"
-              className="mb-4 block text-xl font-bold text-black hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl"
-            >
-              {title}
-            </Link>
-          </h3>
+          <Link
+            to={ROUTE_CONSTANTS.COURSE_DETAILS_PAGE}
+            className="mb-4 block text-xl font-bold text-black hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl"
+          >
+            {title}
+          </Link>
+        </h3>
         <p className="mb-6 border-b overflow-auto max-h-20 h-20 border-body-color border-opacity-10 pb-6 text-base font-medium text-body-color dark:border-white dark:border-opacity-10">
-            {description}
-           
-          </p>
+          {description}
+
+        </p>
         <div className="mb-1 mt-7 border-b flex row border-body-color border-opacity-10 dark:border-white dark:border-opacity-10">
-          <button className="flex w-full mr-3 bg-cteal items-center justify-center rounded-md p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-           Chi tiết
-          </button>
-          <button className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
-          Mua khóa học
-          </button>
+
+          {isBought === true ? <>
+            <button onClick={() => handleGoToCourse()} className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                Vào học
+              </button>
+          </> :
+
+            <>
+              <button onClick={() => handleGoToCourse()} className="flex w-full mr-3 bg-cteal items-center justify-center rounded-md p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                Chi tiết
+              </button>
+              <button className="flex w-full items-center justify-center rounded-md  bg-primary p-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                Mua khóa học
+              </button></>
+          }
+
         </div>
         <div className="absolute bottom-0 right-0 z-[-1]">
           <svg

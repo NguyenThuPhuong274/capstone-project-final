@@ -20,6 +20,7 @@ module.exports = {
       cteal: "#2dd4bf",
       yellow: "#FBB040",
       sidebar: "#1c2536",
+      quiz: "#f6f7fb",
       "body-color": "#959CB1",
     },
     screens: {

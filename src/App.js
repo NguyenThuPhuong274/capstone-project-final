@@ -37,7 +37,7 @@ function App() {
   //   dispatch(setUser(user));
   // }
 
-  const [role, setRole] = React.useState("user");
+  const [role, setRole] = React.useState("admin");
 
   // const [isRefresh, setIsRefresh] = React.useState(false);
 

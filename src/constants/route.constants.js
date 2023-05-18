@@ -6,6 +6,7 @@ export const ROUTE_CONSTANTS = {
     ERROR_PAGE: "/error",
     BLOG_PAGE: "/blogs",
     COURSE_PAGE: "/courses",
+    MY_COURSE_PAGE: "/authen/my-course",
     SUPPORT_PAGE: "/support",
     CONTACT_PAGE: "/contact",
     ACCOUNT_PAGE: "/authen/account",
@@ -15,4 +16,7 @@ export const ROUTE_CONSTANTS = {
     ADMIN_SUPPORT_PAGE: "/authen/supports",
     ADMIN_CONTACT_PAGE: "/authen/contacts",
     ADMIN_COURSE_DETAILS: "/authen/course-details",
+    COURSE_DETAILS_PAGE: "/course-details",
+    LESSON_VIEW_PAGE: "/authen/lesson-view",
+    BLOG_DETAILS_PAGE: "/blog-details",
 }

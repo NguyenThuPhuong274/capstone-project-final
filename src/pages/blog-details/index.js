@@ -1,24 +1,33 @@
+import { Link } from "react-router-dom";
 import RelatedPost from "../../components/Blog/RelatedPost";
 import SharePost from "../../components/Blog/SharePost";
 import TagButton from "../../components/Blog/TagButton";
+import Breadcrumb from "../../components/Common/Breadcrumb";
 import NewsLatterBox from "../../components/Contact/Information";
+import { ROUTE_CONSTANTS } from "../../constants/route.constants";
+import { Chip } from "@mui/material";
 
-const BlogDetailsPage = (blog) => {
+const BlogDetailsPage = () => {
 
-  const {id, title, image, category, publishDate, tags} = blog;
+  const blog = {
+    title: "Chuyển tiếng việt sang tiếng Nhật",
+    category: "Kinh nghiệm học tiếng Nhật",
+
+  }
   return (
     <>
-      <section className="overflow-hidden pt-[180px] pb-[120px]">
+      <Breadcrumb pageName={"Nội dung tin tức"} />
+      <section className="overflow-hidden pt-[20px] pb-[120px]">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4 lg:w-8/12">
               <div>
                 <h2 className="mb-8 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight">
-                  {title}
+                  {blog.title}
                 </h2>
                 <div className="mb-10 flex flex-wrap items-center justify-between border-b border-body-color border-opacity-10 pb-4 dark:border-white dark:border-opacity-10">
                   <div className="flex flex-wrap items-center">
-                    
+
                     <div className="mb-5 flex items-center">
                       <p className="mr-5 flex items-center text-base font-medium text-body-color">
                         <span className="mr-3">
@@ -39,23 +48,9 @@ const BlogDetailsPage = (blog) => {
                             <path d="M13.2637 3.3697H7.64754V2.58105C8.19721 2.43765 8.62738 1.91189 8.62738 1.31442C8.62738 0.597464 8.02992 0 7.28906 0C6.54821 0 5.95074 0.597464 5.95074 1.31442C5.95074 1.91189 6.35702 2.41376 6.93058 2.58105V3.3697H1.31442C0.597464 3.3697 0 3.96716 0 4.68412V13.2637C0 13.9807 0.597464 14.5781 1.31442 14.5781H13.2637C13.9807 14.5781 14.5781 13.9807 14.5781 13.2637V4.68412C14.5781 3.96716 13.9807 3.3697 13.2637 3.3697ZM6.6677 1.31442C6.6677 0.979841 6.93058 0.716957 7.28906 0.716957C7.62364 0.716957 7.91042 0.979841 7.91042 1.31442C7.91042 1.649 7.64754 1.91189 7.28906 1.91189C6.95448 1.91189 6.6677 1.6251 6.6677 1.31442ZM1.31442 4.08665H13.2637C13.5983 4.08665 13.8612 4.34954 13.8612 4.68412V6.45261H0.716957V4.68412C0.716957 4.34954 0.979841 4.08665 1.31442 4.08665ZM13.2637 13.8612H1.31442C0.979841 13.8612 0.716957 13.5983 0.716957 13.2637V7.16957H13.8612V13.2637C13.8612 13.5983 13.5983 13.8612 13.2637 13.8612Z" />
                           </svg>
                         </span>
-                        12 Jan 2024
+                        12/09/2023
                       </p>
-                      <p className="mr-5 flex items-center text-base font-medium text-body-color">
-                        <span className="mr-3">
-                          <svg
-                            width="18"
-                            height="13"
-                            viewBox="0 0 18 13"
-                            className="fill-current"
-                          >
-                            <path d="M15.6375 0H1.6875C0.759375 0 0 0.759375 0 1.6875V10.6875C0 11.3062 0.309375 11.8406 0.84375 12.15C1.09687 12.2906 1.40625 12.375 1.6875 12.375C1.96875 12.375 2.25 12.2906 2.53125 12.15L5.00625 10.7156C5.11875 10.6594 5.23125 10.6312 5.34375 10.6312H15.6094C16.5375 10.6312 17.2969 9.87187 17.2969 8.94375V1.6875C17.325 0.759375 16.5656 0 15.6375 0ZM16.3406 8.94375C16.3406 9.3375 16.0312 9.64687 15.6375 9.64687H5.37187C5.09062 9.64687 4.78125 9.73125 4.52812 9.87187L2.05313 11.3063C1.82812 11.4187 1.575 11.4187 1.35 11.3063C1.125 11.1938 1.0125 10.9688 1.0125 10.7156V1.6875C1.0125 1.29375 1.32188 0.984375 1.71563 0.984375H15.6656C16.0594 0.984375 16.3687 1.29375 16.3687 1.6875V8.94375H16.3406Z" />
-                            <path d="M12.2342 3.375H4.69668C4.41543 3.375 4.19043 3.6 4.19043 3.88125C4.19043 4.1625 4.41543 4.3875 4.69668 4.3875H12.2623C12.5435 4.3875 12.7685 4.1625 12.7685 3.88125C12.7685 3.6 12.5154 3.375 12.2342 3.375Z" />
-                            <path d="M11.0529 6.55322H4.69668C4.41543 6.55322 4.19043 6.77822 4.19043 7.05947C4.19043 7.34072 4.41543 7.56572 4.69668 7.56572H11.0811C11.3623 7.56572 11.5873 7.34072 11.5873 7.05947C11.5873 6.77822 11.3342 6.55322 11.0529 6.55322Z" />
-                          </svg>
-                        </span>
-                        50
-                      </p>
+
                       <p className="flex items-center text-base font-medium text-body-color">
                         <span className="mr-3">
                           <svg
@@ -73,12 +68,10 @@ const BlogDetailsPage = (blog) => {
                     </div>
                   </div>
                   <div className="mb-5">
-                    <a
-                      href="#0"
-                      className="inline-flex items-center justify-center rounded-full bg-primary py-2 px-4 text-sm font-semibold text-white"
-                    >
-                      Design
-                    </a>
+                    <Link to={ROUTE_CONSTANTS.BLOG_PAGE} className="bg-lime text-black text-sm font-medium rounded-full py-2 px-4">
+
+                      {blog.category}
+                    </Link>
                   </div>
                 </div>
                 <div>
@@ -298,17 +291,17 @@ const BlogDetailsPage = (blog) => {
                   <div className="items-center justify-between sm:flex">
                     <div className="mb-5">
                       <h5 className="mb-3 text-sm font-medium text-body-color">
-                        Popular Tags :
+                        Nhóm Tin Tức:
                       </h5>
                       <div className="flex items-center">
-                        <TagButton text="Design" />
-                        <TagButton text="Development" />
-                        <TagButton text="Info" />
+                        <TagButton text="Kinh nghiệm học Tiếng Nhật" />
+                        <TagButton text="Văn hóa Nhật Bản" />
+                        <TagButton text="Tin tức sự kiện" />
                       </div>
                     </div>
                     <div className="mb-5">
                       <h5 className="mb-3 text-sm font-medium text-body-color sm:text-right">
-                        Share this post :
+                        Chia sẻ tin tức:
                       </h5>
                       <div className="flex items-center sm:justify-end">
                         <SharePost />
@@ -319,119 +312,64 @@ const BlogDetailsPage = (blog) => {
               </div>
             </div>
             <div className="w-full px-4 lg:w-4/12">
-              <div className="mt-12 mb-10 rounded-md bg-primary bg-opacity-5 p-6 dark:bg-opacity-5 lg:mt-0">
-                <form className="flex items-center justify-between">
-                  <input
-                    type="text"
-                    placeholder="Search here..."
-                    className="palceholder-body-color mr-5 w-full rounded-md border border-transparent py-3 px-5 text-base font-medium text-body-color outline-none focus:border-primary dark:bg-white dark:bg-opacity-10"
-                  />
-                  <button className="flex h-[50px] w-full max-w-[50px] items-center justify-center rounded-md bg-primary text-white">
-                    <svg
-                      width="20"
-                      height="18"
-                      viewBox="0 0 20 18"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M19.4062 16.8125L13.9375 12.375C14.9375 11.0625 15.5 9.46875 15.5 7.78125C15.5 5.75 14.7188 3.875 13.2812 2.4375C10.3438 -0.5 5.5625 -0.5 2.59375 2.4375C1.1875 3.84375 0.40625 5.75 0.40625 7.75C0.40625 9.78125 1.1875 11.6562 2.625 13.0937C4.09375 14.5625 6.03125 15.3125 7.96875 15.3125C9.875 15.3125 11.75 14.5938 13.2188 13.1875L18.75 17.6562C18.8438 17.75 18.9688 17.7812 19.0938 17.7812C19.25 17.7812 19.4062 17.7188 19.5312 17.5938C19.6875 17.3438 19.6562 17 19.4062 16.8125ZM3.375 12.3438C2.15625 11.125 1.5 9.5 1.5 7.75C1.5 6 2.15625 4.40625 3.40625 3.1875C4.65625 1.9375 6.3125 1.3125 7.96875 1.3125C9.625 1.3125 11.2812 1.9375 12.5312 3.1875C13.75 4.40625 14.4375 6.03125 14.4375 7.75C14.4375 9.46875 13.7188 11.125 12.5 12.3438C10 14.8438 5.90625 14.8438 3.375 12.3438Z"
-                        fill="white"
-                      />
-                    </svg>
-                  </button>
-                </form>
-              </div>
+            
               <div className="mb-10 rounded-md bg-primary bg-opacity-5 dark:bg-opacity-10">
                 <h3 className="border-b border-body-color border-opacity-10 py-4 px-8 text-lg font-semibold text-black dark:border-white dark:border-opacity-10 dark:text-white">
-                  Related Posts
+                  Tin Tức Liên Quan
                 </h3>
                 <ul className="p-8">
                   <li className="mb-6 border-b border-body-color border-opacity-10 pb-6 dark:border-white dark:border-opacity-10">
                     <RelatedPost
-                      title="Best way to boost your online sales."
+                      title="Cách học tiếng Nhật hiệu quả"
                       image="/images/blog/post-01.jpg"
                       slug="#"
-                      date="12 Feb 2025"
+                      date="12/10/2022"
                     />
                   </li>
                   <li className="mb-6 border-b border-body-color border-opacity-10 pb-6 dark:border-white dark:border-opacity-10">
                     <RelatedPost
-                      title="50 Best web design tips & tricks that will help you."
+                      title="Robot tại Nhât bản"
                       image="/images/blog/post-02.jpg"
                       slug="#"
-                      date="15 Feb, 2024"
+                      date="13/07/2021"
                     />
                   </li>
                   <li>
                     <RelatedPost
-                      title="The 8 best landing page builders, reviewed"
+                      title="8 điều cần biết khi đến Nhật"
                       image="/images/blog/post-03.jpg"
                       slug="#"
-                      date="05 Jun, 2024"
+                      date="10/10/2019"
                     />
                   </li>
                 </ul>
               </div>
               <div className="mb-10 rounded-md bg-primary bg-opacity-5 dark:bg-opacity-10">
                 <h3 className="border-b border-body-color border-opacity-10 py-4 px-8 text-lg font-semibold text-black dark:border-white dark:border-opacity-10 dark:text-white">
-                  Popular Category
+                 Nhóm Tin Tức
                 </h3>
                 <ul className="py-6 px-8">
                   <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Tailwind Templates
-                    </a>
+                    <Link className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary" to={ROUTE_CONSTANTS.BLOG_PAGE}>
+                      Kinh nghiệm học tiếng Nhật
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Landing page
-                    </a>
+                    <Link className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary" to={ROUTE_CONSTANTS.BLOG_PAGE}>
+                      Văn hóa Nhật Bản
+                    </Link>
+
                   </li>
                   <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Startup
-                    </a>
+                    <Link className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary" to={ROUTE_CONSTANTS.BLOG_PAGE}>
+                      Tin tức sự kiện
+                    </Link>
+
                   </li>
-                  <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Business
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#0"
-                      className="mb-3 inline-block text-base font-medium text-body-color hover:text-primary"
-                    >
-                      Multipurpose
-                    </a>
-                  </li>
+
                 </ul>
               </div>
-              <div className="mb-10 rounded-md bg-primary bg-opacity-5 dark:bg-opacity-10">
-                <h3 className="border-b border-body-color border-opacity-10 py-4 px-8 text-lg font-semibold text-black dark:border-white dark:border-opacity-10 dark:text-white">
-                  Popular Tags
-                </h3>
-                <div className="flex flex-wrap py-6 px-8">
-                  <TagButton text="Themes" />
-                  <TagButton text="UI Kit" />
-                  <TagButton text="Tailwind" />
-                  <TagButton text="Startup" />
-                  <TagButton text="Business" />
-                </div>
-              </div>
+
 
               <NewsLatterBox />
             </div>

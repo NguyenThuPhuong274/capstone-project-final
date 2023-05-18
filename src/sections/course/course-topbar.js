@@ -1,6 +1,5 @@
-import MagnifyingGlassIcon from '@heroicons/react/24/solid/MagnifyingGlassIcon';
 import PlusIcon from '@heroicons/react/24/solid/PlusIcon';
-import { Button, Stack, Card, InputAdornment, OutlinedInput, SvgIcon } from '@mui/material';
+import { Button, Stack, Card, SvgIcon } from '@mui/material';
 import AppInput from '../../components/AppInput/AppInput';
 import React from 'react';
 

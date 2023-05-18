@@ -26,20 +26,20 @@ const Course = () => {
       <div className="container">
         <SectionTitle
           title="CÁC KHÓA HỌC ONLINE TẠI JLEARNING"
-          paragraph="Các khóa học từ N1-N5 đa dạng và phong phú"
+          paragraph="Có rất nhiều khóa học từ N1-N5 đa dạng và phong phú"
           center
           width="665px"
         />
 
         <div className="relative w-full pl-20 pr-20 pb-20">
           <Carousel
-            className="p-2"
             indicators={totalPage > 1 ? true : false}
             autoPlay={true}
             animation="slide"
             navButtonsAlwaysInvisible
-            interval={7000}
+            interval={10000}
             index={currentPage - 1}
+            className="h-[700px]"
           >
             {pageList.map((pageNumber) => {
 
@@ -47,7 +47,7 @@ const Course = () => {
               let endIndex = startIndex + 3;
               if (endIndex > totalCourse) endIndex = totalCourse;
 
-              return <div key={"item-" + pageNumber} className={` w-full h-full duration-700 ease-in-out grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-3 `}>
+              return <div key={"item-" + pageNumber} className={`p-3 w-full h-full duration-700 ease-in-out grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-3 `}>
                 {coursesData.slice(startIndex, endIndex).map((course) => (
                   <CourseCard
                     id={course.id}

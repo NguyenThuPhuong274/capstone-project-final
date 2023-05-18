@@ -1,4 +1,3 @@
-import React from "react";
 import { API } from "../constants";
 import axios from "axios";
 

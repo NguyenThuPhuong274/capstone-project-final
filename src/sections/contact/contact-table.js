@@ -1,7 +1,6 @@
 import { format } from 'date-fns';
 import React from 'react';
 import {
-  Avatar,
   Box,
   Card,
   Checkbox,
@@ -49,13 +48,13 @@ export const ContactTable = (props) => {
   }
 
   React.useEffect(() => {
-    if (currentId != null) {
+    if (currentId !== null) {
       handleContact();
     }
   }, [currentId]);
 
   React.useEffect(() => {
-    if (isOpenModal == false) {
+    if (isOpenModal === false) {
       setCurrentId(null);
     }
   }, [isOpenModal]);
@@ -146,11 +145,11 @@ export const ContactTable = (props) => {
                     </TableCell>
 
                     <TableCell>
-                      <Chip color={contact.status == true ? 'secondary' : 'error'} label={contact.status == true ? 'Đã phản hồi' : 'Chưa phản hồi'} />
+                      <Chip color={contact.status === true ? 'secondary' : 'error'} label={contact.status === true ? 'Đã phản hồi' : 'Chưa phản hồi'} />
                     </TableCell>
                     <TableCell>
                       <Button onClick={() => setCurrentId(contact.id)} variant="contained" className='bg-primary ' size='small'>
-                        {contact.status == true ? 'Chỉnh sửa' : 'Phản hồi'}
+                        {contact.status === true ? 'Chỉnh sửa' : 'Phản hồi'}
                       </Button>
 
 

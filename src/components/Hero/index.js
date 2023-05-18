@@ -21,7 +21,7 @@ const Hero = () => {
 
                 Hãy cùng trải nghiệm và nâng cao trình độ tiếng Nhật của bạn với chương trình học đa dạng và phong phú của trang web chúng tôi!
                 </p>
-                {/* <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+                <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Link
                     to="/"
                     className="rounded-md bg-primary py-4 px-8 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
@@ -35,7 +35,7 @@ const Hero = () => {
                   >
                     Liên hệ giảng viên
                   </Link>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>

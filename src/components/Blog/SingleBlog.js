@@ -1,24 +1,26 @@
 
+import { Card } from "@mui/material";
 import SvgIcon from "@mui/material/SvgIcon";
 import {Link} from "react-router-dom";
+import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 
 const SingleBlog = ({ blog, actionTitle, icon, handleAction }) => {
   const {id, title, image, paragraph, tags, category, publishDate } = blog;
   return (
     <>
-      <div
-     
-        className=" fadeInUp overflow-hidden rounded-md h-full bg-white shadow-one dark:bg-dark"
+      <Card
+     sx={{boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px;"}}
+        className=" fadeInUp overflow-hidden rounded-md h-full bg-white  dark:bg-dark"
         data-wow-delay=".1s"
       >
-        <Link to="/" className="relative block h-[230px] w-full">
+        <Link to={ROUTE_CONSTANTS.BLOG_DETAILS_PAGE} className="relative block h-[230px] w-full">
 
           <img className="w-full h-[230px]" src={image} alt="image" />
         </Link>
         <div className="p-6 h-full  sm:p-8 md:py-8 md:px-6 lg:p-8 xl:py-8 xl:px-5 2xl:p-8">
           <h3>
             <Link
-              to="/"
+              to={ROUTE_CONSTANTS.BLOG_DETAILS_PAGE}
               className="mb-4 block text-xl font-bold text-black hover:text-primary dark:text-white dark:hover:text-primary sm:text-2xl"
             >
               {title}
@@ -32,7 +34,7 @@ const SingleBlog = ({ blog, actionTitle, icon, handleAction }) => {
             <h4 className="mb-1 text-sm font-medium text-dark dark:text-white">
               {publishDate}
             </h4>
-            <Link to={"/"} className="bg-lime text-black text-sm font-medium rounded-full py-2 px-4">
+            <Link to={ROUTE_CONSTANTS.BLOG_PAGE} className="bg-lime text-black text-sm font-medium rounded-full py-2 px-4">
               {category}
             </Link>
           </div>
@@ -44,7 +46,7 @@ const SingleBlog = ({ blog, actionTitle, icon, handleAction }) => {
             </button>
           </div>
         </div>
-      </div>
+      </Card>
     </>
   );
 };

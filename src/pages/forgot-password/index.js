@@ -1,10 +1,10 @@
 
-import { APP_CONSTANTS, SIGNIN_CONSTANTS, SIGNUP_CONSTANTS } from "../../constants/constants";
+import { APP_CONSTANTS, SIGNIN_CONSTANTS } from "../../constants/constants";
 import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 import { forgotPassword } from "../../redux/authenSlice";
 import {Link} from "react-router-dom";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 
 

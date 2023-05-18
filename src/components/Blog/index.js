@@ -39,6 +39,7 @@ const Blog = () => {
             navButtonsAlwaysInvisible
             interval={7000}
             index={currentPage - 1}
+            className="h-[700px]"
           >
             {pageList.map((pageNumber) => {
 

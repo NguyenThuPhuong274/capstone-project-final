@@ -41,9 +41,9 @@ const coursesData = [
       },
       {
         id: 5,
-        price: "free",
-        duration:"",
-        description: "Khóa học N5 giúp nâng cao trình độ tiếng Nhật tại sơ cấp",
+        price: 505600,
+        duration: 12,
+        description: "Khóa học N5 giúp nâng cao trình độ tiếng Nhật tại trung cấp",
         title: "Khóa học N5",
         level: 5,
         img_url: Course3,

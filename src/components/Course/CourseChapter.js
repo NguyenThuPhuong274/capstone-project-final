@@ -18,6 +18,8 @@ import {
     TableRow,
     Paper
 } from "@mui/material";
+import CourseLessonModal from "./CourseLessonModal";
+import ConfirmDialog from "../Confirm";
 
 function createData(
     lessonId,
@@ -38,10 +40,14 @@ const rows = [
 
 ];
 
+
+
 const CourseChapter = () => {
 
     const [expanded, setExpanded] = React.useState(false);
     const [isAddLesson, setIsAddLesson] = React.useState(false);
+    const [isDeleteChapter, setIsDeleteChapter] = React.useState(false);
+    const [isDeleteLesson, setIsDeleteLesson] = React.useState(false);
     const handleChange =
         (panel) => (event, isExpanded) => {
             setExpanded(isExpanded ? panel : false);
@@ -53,6 +59,22 @@ const CourseChapter = () => {
         const remainingSeconds = seconds % 60;
         return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
 
+    }
+
+    const handleConfirmDeleteChapter = (value) => {
+        if (value == true) {
+        } else {
+            
+        }
+        setIsDeleteChapter(false);
+    }
+
+    const handleConfirmDeleteLesson= (value) => {
+        if (value == true) {
+        } else {
+            
+        }
+        setIsDeleteLesson(false);
     }
 
     return (
@@ -80,12 +102,12 @@ const CourseChapter = () => {
                                 <PlusIcon />
                             </SvgIcon>Thêm mới bài học
                         </Button>
-                        <Button sx={{ fontSize: 12 }} variant="contained" className='bg-pink-500' onClick={() => setIsAddLesson(true)}>
+                        <Button sx={{ fontSize: 12 }} variant="contained" className='bg-pink-500' onClick={() => setIsDeleteChapter(true)}>
                             <SvgIcon sx={{ fontSize: 18, mr: 1 }} >
                                 <TrashIcon />
                             </SvgIcon> Xóa chương
                         </Button>
-                        <Button sx={{ fontSize: 12 }} variant="contained" className='bg-primary' onClick={() => setIsAddLesson(true)}>
+                        <Button sx={{ fontSize: 12 }} variant="contained" className='bg-primary' onClick={() => setIsDeleteChapter(true)}>
                             <SvgIcon sx={{ fontSize: 18, mr: 1 }} >
                                 <PencilIcon />
                             </SvgIcon> Chỉnh sửa chương
@@ -115,7 +137,7 @@ const CourseChapter = () => {
                                         <TableCell>
                                             <Stack direction={"row"} spacing={1}>
 
-                                                <Button variant="contained" size="small" className='bg-pink-500' onClick={() => setIsAddLesson(true)}>
+                                                <Button variant="contained" size="small" className='bg-pink-500' onClick={() => setIsDeleteLesson(true)}>
                                                     <SvgIcon sx={{ fontSize: 18 }} >
                                                         <TrashIcon />
                                                     </SvgIcon>
@@ -134,9 +156,12 @@ const CourseChapter = () => {
                     </TableContainer>
                 </AccordionDetails>
             </Accordion>
-           
 
+            <CourseLessonModal isOpenModal={isAddLesson} handleCloseModal={() => setIsAddLesson(false)} />
+            <ConfirmDialog title={"Xác nhận xóa chương"} description={"Chương và tất cả khóa học trong chương sẽ bị xóa! Bạn có muốn tiếp tục?"} isOpen={isDeleteChapter} handleAction={handleConfirmDeleteChapter} />
+            <ConfirmDialog title={"Xác nhận xóa bài học"} description={"Tất cả thông tin liên quan tới bài học sẽ bị xóa! Bạn có muốn tiếp tục?"} isOpen={isDeleteLesson} handleAction={handleConfirmDeleteLesson} />
         </div>
+
     );
 }
 

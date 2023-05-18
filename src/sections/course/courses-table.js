@@ -5,15 +5,12 @@ import {
   Avatar,
   Box,
   Card,
-  Checkbox,
   Stack,
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TablePagination,
   TableRow,
-  Paper,
   Button,
   SvgIcon,
   Chip,
@@ -27,7 +24,6 @@ export const CoursesTable = (props) => {
 
   const navigate = useNavigate();
   const {
-    count = 0,
     items = [],
   } = props;
 

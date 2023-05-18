@@ -53,7 +53,7 @@ const authenSlice = createSlice({
       console.log("login successfully", action.payload);
       toast.success("Đăng nhập thành công");
     }).addCase(signup.fulfilled, (state, action) => {
-      if (action.payload.rowAffected == 1) {
+      if (action.payload.rowAffected === 1) {
         // const { user, accessToken } = action.payload;
         state.createAccountStatus = true;
         // state.token = accessToken;

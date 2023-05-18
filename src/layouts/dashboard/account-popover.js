@@ -11,6 +11,7 @@ import { SvgIcon } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import authenSlice from '../../redux/authenSlice';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE_CONSTANTS } from '../../constants/route.constants';
 
 export const AccountPopover = (props) => {
   const { anchorEl, onClose, open, account } = props;
@@ -18,6 +19,12 @@ export const AccountPopover = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { signOut } = authenSlice.actions;
+
+const redirectToPage = useCallback((path) => {
+  onClose?.();
+  navigate(path);
+});
+
 
   const handleSignOut = useCallback(
     () => {
@@ -30,10 +37,15 @@ export const AccountPopover = (props) => {
 
   return (
     <Popover
+    sx={{ mt: 3, mr: 2}}
       anchorEl={anchorEl}
       anchorOrigin={{
-        horizontal: 'left',
-        vertical: 'bottom'
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
       }}
       onClose={onClose}
       open={open}
@@ -41,6 +53,7 @@ export const AccountPopover = (props) => {
     >
       <Box
         sx={{
+         
           py: 1.5,
           px: 2
         }}
@@ -70,21 +83,21 @@ export const AccountPopover = (props) => {
 
         {role == "admin" ? <></> : <>
 
-          <MenuItem onClick={handleSignOut} >
-            <SvgIcon fontSize="small" className='mr-3'>
+          <MenuItem onClick={() => redirectToPage(ROUTE_CONSTANTS.MY_COURSE_PAGE)} >
+            <SvgIcon fontSize="small" color='primary' className='mr-3'>
               <BookmarkIcon />
             </SvgIcon>
             Khóa học của tôi
           </MenuItem>
-          <MenuItem onClick={handleSignOut}>
-            <SvgIcon fontSize="small" className='mr-3'>
+          <MenuItem onClick={() => redirectToPage(ROUTE_CONSTANTS.ACCOUNT_PAGE)}>
+            <SvgIcon color='primary' fontSize="small" className='mr-3'>
               <UserIcon />
             </SvgIcon>
             Thông tin cá nhân
           </MenuItem>
         </>}
         <MenuItem onClick={handleSignOut}>
-          <SvgIcon fontSize="small" className='mr-3'>
+          <SvgIcon  color='primary' fontSize="small" className='mr-3'>
             <PowerIcon />
           </SvgIcon>
           Đăng xuất
