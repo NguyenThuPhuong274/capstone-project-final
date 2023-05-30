@@ -1,4 +1,4 @@
-import { Card, CardContent, Tab,Tabs, Box,Typography } from "@mui/material";
+import { Card, CardContent, Tab, Tabs, Box, Typography } from "@mui/material";
 import SingleBlog from "../../components/Blog/SingleBlog";
 import blogData from "../../components/Blog/blogData";
 import Breadcrumb from "../../components/Common/Breadcrumb";
@@ -7,6 +7,11 @@ import React from "react";
 import { useTheme } from '@mui/material/styles';
 import SwipeableViews from 'react-swipeable-views';
 import BlogList from "../../components/Blog/BlogList";
+import BlogByCategory from "./BlogByCategory";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getBlogs } from "../../redux/blogSlice";
+import { getBlogCategories } from "../../redux/blogCategorySlice";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,6 +54,25 @@ const BlogPage = () => {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+  const dispatch = useDispatch();
+  const blogs = useSelector((state) => state.blog.data);
+
+
+
+  const categories = useSelector((state) => state.blogCategory.data);
+  React.useEffect(() => {
+    dispatch(getBlogs());
+    dispatch(getBlogCategories());
+  }, []);
+
+  let newCategories = [];
+  newCategories.push({ name: "Tất cả", blog_category_id: 0 })
+  for (let i = 0; i < categories.length; i++) {
+    newCategories.push(categories[i]);
+  }
+
+
   return (
     <>
       <Breadcrumb
@@ -56,45 +80,7 @@ const BlogPage = () => {
         description="Cập nhật tin tức khóa học, chia sẻ kinh nghiệp"
       />
 
-      <section className="pl-12 pr-12 pt-6 w-full pb-[120px]">
-        <div className="mt-[20px] w-full mr-[20px] mb-[20px]">
-          <Card sx={{ ml: "15px", w: "100%", boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" }}>
-            <CardContent>
-              <Box sx={{ width: '100%', }}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  indicatorColor="secondary"
-                  textColor="inherit"
-                  variant="fullWidth"
-                  centered
-                  aria-label="full width tabs example"
-                >
-                  <Tab label="Kinh nghiệp học tiếng nhật" {...a11yProps(0)} />
-                  <Tab label="Văn hóa nhật bản" {...a11yProps(1)} />
-                  <Tab label="Tin tức sự kiện" {...a11yProps(2)} />
-                </Tabs>
-                <SwipeableViews
-                  axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                  index={value}
-                  onChangeIndex={handleChangeIndex}
-                >
-                  <TabPanel value={value} index={0} dir={theme.direction}>
-                    <BlogList enableActionAdd={false} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Kinh Nghiệm Học Tiếng Nhật".toLowerCase())} />
-                  </TabPanel>
-                  <TabPanel value={value} index={1} dir={theme.direction}>
-                    <BlogList enableActionAdd={false} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Văn Hóa Nhật Bản".toLowerCase())} />
-                  </TabPanel>
-                  <TabPanel value={value} index={2} dir={theme.direction}>
-                    <BlogList enableActionAdd={false} blogData={blogData.filter((blog) => blog.category.toLowerCase() == "Tin Tức Sự Kiện".toLowerCase())} />
-                  </TabPanel>
-                </SwipeableViews>
-              </Box>
-            </CardContent>
-          </Card>
-
-        </div>
-      </section>
+      <BlogByCategory categories={newCategories} data={blogs} />
     </>
   );
 };

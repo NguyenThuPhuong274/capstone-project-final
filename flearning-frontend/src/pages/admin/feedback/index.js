@@ -8,7 +8,7 @@ const AdminFeedbackPage = () => {
     const dispatch = useDispatch();
     const { setCurrentPage } = userSlice.actions;
     React.useEffect(() => {
-        dispatch(setCurrentPage("Quản lý phản hồi"));
+        dispatch(setCurrentPage("Phản hồi của học viên"));
     }, [])
 
 

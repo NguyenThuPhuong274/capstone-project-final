@@ -18,7 +18,12 @@ import axios from "axios";
     return response.data;
   },
   forgotPassword: async (email) => {
-    const response = await axios.post(API.AUTHEN.FORGOT_PASSWORD, email);
+    const response = await axios.post(API.MAIL + "/send/forgot-password", email);
+    return response.data;
+  },
+  changePassword: async (user) => {
+    // console.log(user);
+    const response = await axios.post(API.AUTHEN.CHANGE_PASSWORD, user);
     return response.data;
   },
 };

@@ -6,40 +6,19 @@ import React from "react";
 import Avatar1 from "../../assets/images/blog/author-01.png";
 import Avatar2 from "../../assets/images/blog/author-02.png";
 import Avatar3 from "../../assets/images/blog/author-03.png";
-const testimonialData = [
-  {
-    id: 1,
-    name: "Trần Tuyết Lan",
-    designation: "Học viên tiếng nhật",
-    content:
-      "Em thực sự rất hài lòng với khóa học tiếng Nhật này. Nhiệt tình giúp đỡ các học viên. Nội dung bài học được thiết kế rất tốt và phù hợp với nhu cầu của mỗi học viên. Em đã học được rất nhiều từ vựng mới và khả năng giao tiếp của tôi đã được cải thiện đáng kể sau khi hoàn thành khóa học này. Em chắc chắn sẽ tiếp tục học tiếng Nhật tại đây.",
-    image: Avatar1,
-    star: 5,
-  },
-  {
-    id: 2,
-    name: "Nguyễn Thành Lâm",
-    designation: "Học viên tiếng nhật",
-    content:
-      "Em rất thích cách giảng dạy của cô. Giúp tôi học tiếng Nhật một cách dễ dàng và hiệu quả. Nội dung khóa học rất phong phú, bao gồm cả luyện nghe, nói, đọc và viết.  Em đã học được nhiều về văn hóa và lịch sử của Nhật Bản trong quá trình học tiếng Nhật ở đây. Em thật sự rất vui khi đã tham gia khóa học này.",
-    image: Avatar2,
-    star: 5,
-  },
-  {
-    id: 3,
-    name: "Hoàng Việt Hùng",
-    designation: "Học viên tiếng nhật",
-    content:
-      "Em đã học tiếng ở nhiều nơi khác nhau, tốt nhất mà em từng tham gia. Giáo viên rất giỏi và nhiệt tình, họ luôn sẵn sàng giúp đỡ và trả lời các câu hỏi của tôi. Em rất thích cách giảng dạy linh hoạt và tùy chỉnh theo nhu cầu của mỗi học viên. Nội dung bài học rất rõ ràng và dễ hiểu, giúp em học tiếng Nhật một cách hiệu quả và nhanh chóng.",
-    image: Avatar3,
-    star: 5,
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { getFeedbacks } from "../../redux/feedbackSlice";
+
 
 const Testimonials = () => {
+const dispatch = useDispatch();
+  const feedbacks = useSelector((state) => state.feedback.data);
 
+  React.useEffect(() => {
+    dispatch(getFeedbacks());
+  }, []);
 
-  const totalTestimonials = testimonialData.length;
+  const totalTestimonials = feedbacks.length;
   let totalPage = Math.floor(totalTestimonials / 3);
   let pageList = [];
   if (Math.floor(totalTestimonials % 3) != 0) totalPage += 1;
@@ -78,7 +57,7 @@ const Testimonials = () => {
               if (endIndex > totalTestimonials) endIndex = totalTestimonials;
 
               return <div key={"item-" + pageNumber} className={` w-full h-full duration-700 ease-in-out grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:grid-cols-3 `}>
-                {testimonialData.slice(startIndex, endIndex).map((testimonial) => (
+                {feedbacks.slice(startIndex, endIndex).map((testimonial) => (
                   <SingleTestimonial key={testimonial.id} testimonial={testimonial} />
                 ))}
               </div>

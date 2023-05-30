@@ -6,6 +6,12 @@ import feedbackServices from "./feedbackServices";
 import supportServices from "./supportServices";
 import lessonServices from "./lessonServices";
 import chapterServices from "./chapterServices";
+import questionServices from "./questionServices";
+import testServices from "./testServices";
+import blogCategoryServices from "./blogCategoryServices";
+import paymentServices from "./paymentServices";
+import blogDetailServices from "./blogDetailServices";
+import dashboardServices from "./dashboardServices";
 
 
 export {
@@ -16,5 +22,11 @@ export {
     blogServices,
     supportServices,
     lessonServices,
-    chapterServices
+    paymentServices,
+    chapterServices,
+    questionServices,
+    blogCategoryServices,
+    blogDetailServices,
+    dashboardServices,
+    testServices
 };

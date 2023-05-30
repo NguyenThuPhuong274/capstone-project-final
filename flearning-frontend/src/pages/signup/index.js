@@ -6,35 +6,48 @@ import { toast } from 'react-toastify';
 import { APP_CONSTANTS, SIGNIN_CONSTANTS, SIGNUP_CONSTANTS } from "../../constants/constants";
 import { ROUTE_CONSTANTS } from "../../constants/route.constants";
 import GoogleLogin from "react-google-login";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
+import { validateEmail } from "../../helpers/validation";
 
 const SignupPage = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [fullname, setFullname] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [isAgreedPolicy, setIsAgreedPolicy] = React.useState(false);
-  const authenState = useSelector((state) => state.authen);
-  const { signOut } = authenSlice.actions;
+
+
+
 
   const handleSignup = () => {
-    if(fullname == "" || email == "" || password == "" || confirmPassword == "") {
+    if (fullname == "" || email == "" || password == "" || confirmPassword == "") {
       toast.warning('Nhập tên, tài khoản và mật khẩu của bạn!');
-    } else {
-      if(confirmPassword != password) {
-        toast.warning('Mật khẩu không trùng khớp');
-      } else {
-       if(isAgreedPolicy) {
-        console.log("email: " + email + ", password: " + password + ", fullname: " + fullname);
-        dispatch(signup({fullname: fullname, email: email, password: password}));
-       } else {
-        toast.warning('Hãy đồng ý với chính sách và điều khoản');
-       }
-      }
+      return;
     }
-  };
+
+    if (validateEmail(email) === false) {
+      toast.warning('Email không hợp lệ');
+      return;
+    }
+
+    if (confirmPassword != password) {
+      toast.warning('Mật khẩu không trùng khớp');
+      return;
+    }
+
+    if (!isAgreedPolicy) {
+      toast.warning('Hãy đồng ý với chính sách và điều khoản');
+      return;
+    }
+
+    console.log("email: " + email + ", password: " + password + ", fullname: " + fullname);
+    dispatch(signup({ fullname: fullname, email: email, password: password, role_id: 2 }));
+    navigate(ROUTE_CONSTANTS.SIGN_IN);
+
+  }
 
   const responseGoogle = (response) => {
     console.log(response);
@@ -47,12 +60,14 @@ const SignupPage = () => {
     } else {
       // toast.error('Không thể đăng nhập bằng Google');
     }
-   
+
     console.log(error);
   }
 
   return (
     <>
+      <SmoothScrollUp />
+
       <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
@@ -65,13 +80,13 @@ const SignupPage = () => {
                   {SIGNUP_CONSTANTS.SIGN_UP_MESSAGE}
                 </p>
                 <div className="mb-6 flex w-full items-center justify-center">
-                <GoogleLogin
-                  clientId={APP_CONSTANTS.GOOGLE_CLIENT_ID}
-                  buttonText="Đăng ký bằng Google"
-                  onSuccess={responseGoogle}
-                  onFailure={onFailure}
-                  cookiePolicy={'single_host_origin'}
-                />
+                  <GoogleLogin
+                    clientId={APP_CONSTANTS.GOOGLE_CLIENT_ID}
+                    buttonText="Đăng ký bằng Google"
+                    onSuccess={responseGoogle}
+                    onFailure={onFailure}
+                    cookiePolicy={'single_host_origin'}
+                  />
                 </div>
                 <div className="mb-8 flex items-center justify-center">
                   <span className="hidden h-[1px] w-full max-w-[60px] bg-body-color sm:block"></span>
@@ -119,7 +134,7 @@ const SignupPage = () => {
                       className="mb-3 block text-sm font-medium text-dark dark:text-white"
                     >
                       {" "}
-                     {APP_CONSTANTS.PASSWORD} {" "}
+                      {APP_CONSTANTS.PASSWORD} {" "}
                     </label>
                     <input
                       type="password"
@@ -135,7 +150,7 @@ const SignupPage = () => {
                       className="mb-3 block text-sm font-medium text-dark dark:text-white"
                     >
                       {" "}
-                     Nhập lại mật khẩu {" "}
+                      Nhập lại mật khẩu {" "}
                     </label>
                     <input
                       type="password"
@@ -193,8 +208,8 @@ const SignupPage = () => {
                   </div>
                   <div className="mb-6">
                     <button
-                    onClick={handleSignup}
-                    className="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                      onClick={handleSignup}
+                      className="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
                       {SIGNUP_CONSTANTS.SIGN_UP_TITLE}
                     </button>
                   </div>

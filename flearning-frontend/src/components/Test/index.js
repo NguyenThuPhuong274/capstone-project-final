@@ -1,9 +1,11 @@
-import { AppBar, Button, Dialog, DialogContent, IconButton, List, Toolbar, Typography } from "@mui/material"
+import { AppBar, Button, Dialog, DialogContent, IconButton, List, SvgIcon, Toolbar, Typography } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
 import React from "react";
 import ConfirmDialog from "../Confirm";
-import Quiz from "../Quiz";
+import QuestionCard from "../QuestionCard";
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Stack } from "@mui/system";
 const Transition = React.forwardRef(function Transition(
     props,
@@ -14,31 +16,48 @@ const Transition = React.forwardRef(function Transition(
 
 
 
-const TestDialog = (props) => {
-    const { isOpen, setIsOpen, test } = props;
+const TestDialog = ({ isOpen, setIsOpen, setOpenTestResult, test, setTestAnswers, handleTestDone }) => {
     const [openReturnConfirm, setOpenReturnConfirm] = React.useState(false);
     const [openSubmitConfirm, setOpenSubmitConfirm] = React.useState(false);
-    const [countdown, setCountdown] = React.useState(60 * 30);
+    const [isTimeOut, setOpenTimeOut] = React.useState(false);
+    const [countdown, setCountdown] = React.useState(test?.duration * 60);
+
+    const [answers, setAnswers] = React.useState([]);
 
     React.useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCountdown(countdown => countdown - 1);
-        }, 1000);
+        if (isOpen === true) {
+            const intervalId = setInterval(() => {
+                setCountdown(countdown => countdown - 1);
+            }, 1000);
 
-        return () => clearInterval(intervalId);
-    }, []);
+            return () => clearInterval(intervalId);
+        }
+    }, [isOpen]);
 
     React.useEffect(() => {
         if (countdown === 0) {
-            // Do something when the countdown is over
-        }
+            setOpenTimeOut(true);
+            setCountdown(0);
+        } 
     }, [countdown]);
 
+    const handleCloseTimeout = (value) => {
+        setOpenTimeOut(false);
+        setIsOpen(false);
+
+        setTestAnswers(answers);
+        setOpenTestResult(true);
+
+        handleTestDone();
+    }
+
     React.useEffect(() => {
-        setCountdown(60 * 30);
+        setCountdown(test?.duration * 60);
+        setAnswers([]);
     }, [isOpen]);
 
     const formatTime = (seconds) => {
+      if(seconds >= 0) {
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds % 3600) / 60);
         const secs = seconds % 60;
@@ -46,15 +65,11 @@ const TestDialog = (props) => {
         return [hours, minutes, secs]
             .map(time => time.toString().padStart(2, '0'))
             .join(':');
+      } else {
+        return "00:00:00";
+      }
     };
-    const handleSubmitTest = () => {
 
-    }
-
-    const handleClose = () => {
-
-        setIsOpen(false)
-    }
     const handleConfirmReturnAction = (value) => {
         if (value == true) {
             setOpenReturnConfirm(false);
@@ -67,6 +82,12 @@ const TestDialog = (props) => {
         if (value == true) {
             setOpenSubmitConfirm(false);
             setIsOpen(false);
+
+            setTestAnswers(answers);
+            setOpenTestResult(true);
+
+            handleTestDone();
+
         } else {
             setOpenSubmitConfirm(false);
         }
@@ -74,6 +95,17 @@ const TestDialog = (props) => {
 
     const handleOpenConfirm = () => {
         setOpenReturnConfirm(true)
+    }
+
+    const handleSetValue = (index, value) => {
+
+        if (index < answers.length) {
+            answers[index] = value;
+        } else {
+            answers.push(value);
+        }
+        console.log("answers: ", answers);
+
     }
 
     return <>
@@ -95,7 +127,7 @@ const TestDialog = (props) => {
                         onClick={handleOpenConfirm}
                         aria-label="close"
                     >
-                        <CloseIcon />
+                        <ArrowBackIcon />
                     </IconButton>
                     <div className="flex justify-between items-center w-full" >
                         <Typography sx={{ cursor: "pointer" }} onClick={handleOpenConfirm} variant="h6" component="div">
@@ -103,14 +135,17 @@ const TestDialog = (props) => {
                         </Typography>
                         <Stack className="w-[120px] mr-[90px]" spacing={0} direction={"column"}>
                             <Typography className="w-full text-center"  >
-                                Bài kiểm tra 1
+                                {test?.test_name}
                             </Typography>
                             <Typography className="w-full text-center" >
                                 {formatTime(countdown)}
                             </Typography>
                         </Stack>
-                        <Button   color="inherit" onClick={() => setOpenSubmitConfirm(true)}>
-                            Nộp bài
+                        <Button color="inherit" onClick={() => setOpenSubmitConfirm(true)}>
+
+                            <SvgIcon sx={{ mr: 1 }}>
+                                <ThumbUpAltIcon />
+                            </SvgIcon> Nộp bài
                         </Button> </div>
                 </Toolbar>
             </AppBar>
@@ -118,14 +153,31 @@ const TestDialog = (props) => {
             <div className="p-28 pl-64 pr-64 back bg-quiz"  >
                 <Stack direction={"column"} spacing={8}>
                     <Stack direction={"column"} spacing={5}>
-                        <Quiz />
-                        <Quiz />
-                        <Quiz />
-                        <Quiz />
+
+                        {test?.questions.map((question, key) => {
+                            return (
+                                <div key={"question-" + key}>
+                                    <QuestionCard
+                                        question={question}
+                                        index={key}
+                                        totalQuestion={test?.questions.length}
+                                        handleSetValue={handleSetValue}
+                                    />
+                                </div>
+                            );
+                        })}
+
+
+
 
                     </Stack>
                     <div className="flex justify-center w-full" >
-                        <Button className="w-[300px] h-[50px]" variant="contained" onClick={() => setOpenSubmitConfirm(true)} >Nộp Bài</Button>
+                        <Button className="w-[300px] h-[50px]" variant="contained" onClick={() => setOpenSubmitConfirm(true)} >
+                            <SvgIcon sx={{ mr: 1 }}>
+                                <ThumbUpAltIcon />
+                            </SvgIcon> Nộp bài
+
+                        </Button>
                     </div>
                 </Stack>
             </div>
@@ -141,6 +193,13 @@ const TestDialog = (props) => {
             isOpen={openSubmitConfirm}
             title={"Nộp bài kiểm tra"}
             description={"Bài kiểm tra sẽ được nộp? Bạn có muốn tiếp tục?"} handleAction={handleConfirmSubmitAction} />
+
+        <ConfirmDialog
+            isOpen={isTimeOut}
+            closeText="OK"
+            title={"Hết thời gian"}
+            disableClose={true}
+            description={"Thời gian làm bài đã kết thúc!"} handleAction={handleCloseTimeout} />
     </>
 }
 

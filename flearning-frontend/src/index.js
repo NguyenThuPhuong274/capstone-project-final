@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <ToastContainer position="bottom-right" />
+          <ToastContainer position="bottom-right" autoClose={3000}  />
           <App />
         </PersistGate>
       </Provider>

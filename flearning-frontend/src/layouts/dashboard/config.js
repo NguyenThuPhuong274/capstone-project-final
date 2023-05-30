@@ -1,11 +1,11 @@
 import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
 import BookOpenIcon from '@heroicons/react/24/solid/BookOpenIcon';
 import QuestionMarkCircleIcon from '@heroicons/react/24/solid/QuestionMarkCircleIcon';
-import CogIcon from '@heroicons/react/24/solid/CogIcon';
 import FaceSmileIcon from '@heroicons/react/24/solid/FaceSmileIcon';
 import NewspaperIcon from '@heroicons/react/24/solid/NewspaperIcon';
 import PhoneIcon from '@heroicons/react/24/solid/PhoneIcon';
 import UserIcon from '@heroicons/react/24/solid/UserIcon';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import { SvgIcon } from '@mui/material';
 
 export const items = [
@@ -20,16 +20,17 @@ export const items = [
   },
   {
     title: 'Khóa học',
-    path: '/authen/courses',
+    path: '/authen/course',
     icon: (
       <SvgIcon fontSize="small">
         <BookOpenIcon />
       </SvgIcon>
     )
   },
+
   {
     title: 'Bài kiểm tra',
-    path: '/authen/quiz',
+    path: '/authen/test',
     icon: (
       <SvgIcon fontSize="small">
         <QuestionMarkCircleIcon />
@@ -37,8 +38,17 @@ export const items = [
     )
   },
   {
+    title: 'Hóa đơn',
+    path: '/authen/invoices',
+    icon: (
+      <SvgIcon fontSize="small">
+        <ReceiptLongIcon />
+      </SvgIcon>
+    )
+  },
+  {
     title: 'Tin tức',
-    path: '/authen/blogs',
+    path: '/authen/blog',
     icon: (
       <SvgIcon fontSize="small">
         <NewspaperIcon />
@@ -72,15 +82,15 @@ export const items = [
       </SvgIcon>
     )
   },
-  {
-    title: 'Cài đặt',
-    path: '/authen/settings',
-    icon: (
-      <SvgIcon fontSize="small">
-        <CogIcon />
-      </SvgIcon>
-    )
-  },
-  
-  
+  // {
+  //   title: 'Cài đặt',
+  //   path: '/authen/settings',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <CogIcon />
+  //     </SvgIcon>
+  //   )
+  // },
+
+
 ];

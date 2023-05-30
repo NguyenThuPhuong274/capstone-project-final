@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCn73D5cS_xYvGtcxm91gcZLsFeJeYtx_k",
-    authDomain: "flearning-131be.firebaseapp.com",
-    projectId: "flearning-131be",
-    storageBucket: "flearning-131be.appspot.com",
-    messagingSenderId: "778726501025",
-    appId: "1:778726501025:web:dbe6b7d2c5d0daede69ee0",
-    measurementId: "G-VNWT9E04D7"
+    apiKey: "AIzaSyBdR8sE9dHVKC38eif92X97tXaQ3_etDK0",
+  authDomain: "jlearning-2001.firebaseapp.com",
+  projectId: "jlearning-2001",
+  storageBucket: "jlearning-2001.appspot.com",
+  messagingSenderId: "496166088104",
+  appId: "1:496166088104:web:effdf5eb485cb3817d419d",
+  measurementId: "G-JLJGFQBN9Y"
 };
 
 // Initialize Firebase

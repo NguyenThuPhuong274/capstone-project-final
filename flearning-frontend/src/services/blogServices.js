@@ -6,12 +6,16 @@ const blogServices = {
         const response = await axios.get(API.MANAGE_BLOG + "/get");
         return response.data;
     },
+    getBlogById: async (blog) => {
+        const response = await axios.post(API.MANAGE_BLOG + "/get/by-id", blog);
+        return response.data;
+    },
     insertBlog: async (blog) => {
         const response = await axios.post(API.MANAGE_BLOG + "/insert", blog);
         return response.data;
     },
     updateBlog: async (blog) => {
-        const response = await axios.post(API.MANAGE_BLOG + "/insert", blog);
+        const response = await axios.post(API.MANAGE_BLOG + "/update", blog);
         return response.data;
     },
     deleteBlog: async (blog) => {

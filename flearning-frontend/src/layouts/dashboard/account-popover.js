@@ -5,7 +5,7 @@ import { Box, Divider, MenuItem, MenuList, Popover, Typography } from '@mui/mate
 import BookmarkIcon from '@heroicons/react/24/solid/BookmarkIcon';
 import PowerIcon from '@heroicons/react/24/solid/PowerIcon';
 import KeyIcon from '@heroicons/react/24/solid/KeyIcon';
-
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import UserIcon from '@heroicons/react/24/solid/UserCircleIcon';
 
 import { SvgIcon } from '@mui/material';
@@ -14,19 +14,21 @@ import authenSlice from '../../redux/authenSlice';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_CONSTANTS } from '../../constants/route.constants';
 import { ROLE } from '../../constants/constants';
+import courseSlice from '../../redux/courseSlice';
 
 export const AccountPopover = (props) => {
-  
+
   const { anchorEl, onClose, open } = props;
   const user = useSelector((state) => state.authen.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { signOut } = authenSlice.actions;
+  const { resetCourseData } = courseSlice.actions;
 
-const redirectToPage = useCallback((path) => {
-  onClose?.();
-  navigate(path);
-});
+  const redirectToPage = useCallback((path) => {
+    onClose?.();
+    navigate(path);
+  });
 
 
   const handleSignOut = useCallback(
@@ -34,13 +36,14 @@ const redirectToPage = useCallback((path) => {
       onClose?.();
       navigate('/');
       dispatch(signOut());
+      dispatch(resetCourseData());
     },
     [onClose]
   );
 
   return (
     <Popover
-    sx={{ mt: 3, mr: 2}}
+      sx={{ mt: 3, mr: 2 }}
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: 'bottom',
@@ -56,7 +59,7 @@ const redirectToPage = useCallback((path) => {
     >
       <Box
         sx={{
-         
+
           py: 1.5,
           px: 2
         }}
@@ -98,7 +101,12 @@ const redirectToPage = useCallback((path) => {
             </SvgIcon>
             Thông tin cá nhân
           </MenuItem>
-     
+          <MenuItem onClick={() => redirectToPage(ROUTE_CONSTANTS.PAYMENT_HISTORY)}>
+            <SvgIcon color='primary' fontSize="small" className='mr-3'>
+              <MonetizationOnIcon />
+            </SvgIcon>
+            Lịch sử giao dịch
+          </MenuItem>
           <MenuItem onClick={() => redirectToPage(ROUTE_CONSTANTS.CHANGE_PASSWORD_PAGE)}>
             <SvgIcon color='primary' fontSize="small" className='mr-3'>
               <KeyIcon />
@@ -107,7 +115,7 @@ const redirectToPage = useCallback((path) => {
           </MenuItem>
         </>}
         <MenuItem onClick={handleSignOut}>
-          <SvgIcon  color='primary' fontSize="small" className='mr-3'>
+          <SvgIcon color='primary' fontSize="small" className='mr-3'>
             <PowerIcon />
           </SvgIcon>
           Đăng xuất

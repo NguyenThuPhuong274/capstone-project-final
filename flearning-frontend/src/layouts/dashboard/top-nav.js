@@ -1,7 +1,6 @@
 
 
 import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
-import CogIcon from '@heroicons/react/24/solid/CogIcon';
 
 
 import {
@@ -13,26 +12,21 @@ import {
   SvgIcon,
   Tooltip,
   Typography,
-  capitalize,
 } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { usePopover } from '../../hooks/use-popover';
 import { AccountPopover } from './account-popover';
 import React from "react"
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE_CONSTANTS } from '../../constants/route.constants';
 
 const SIDE_NAV_WIDTH = 280;
 const TOP_NAV_HEIGHT = 64;
 
 export const TopNav = (props) => {
-  const { onNavOpen } = props;
+  const navigate = useNavigate();
   const accountPopover = usePopover();
-  const [account, setAccount] = React.useState({
-    name: "admin",
-    role: "admin"
-    
-  });
-
   const currentPage = useSelector((state) => state.user.currentPage);
 
 
@@ -70,8 +64,8 @@ export const TopNav = (props) => {
             direction="row"
             spacing={2}
           >
-            
-           <Typography sx={{textTransform: "capitalize"}} >{currentPage}</Typography>
+
+            <Typography sx={{ textTransform: "capitalize" }} >{currentPage}</Typography>
           </Stack>
           <Stack
             alignItems="center"
@@ -79,26 +73,26 @@ export const TopNav = (props) => {
             spacing={2}
           >
             <Tooltip title="Tổng quan">
-              <IconButton>
-              <Badge
+              <IconButton onClick={() => navigate(ROUTE_CONSTANTS.HOME_PAGE)}>
+                <Badge
                   badgeContent={4}
                   color="success"
                   variant="dot"
                 >
                   <SvgIcon fontSize="small">
-                  <ChartBarIcon />
-                </SvgIcon>
-                </Badge>
-               
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Cài đặt">
-              <IconButton>
-              <SvgIcon fontSize="small">
-                    <CogIcon />
+                    <ChartBarIcon />
                   </SvgIcon>
+                </Badge>
+
               </IconButton>
             </Tooltip>
+            {/* <Tooltip title="Cài đặt">
+              <IconButton onClick={() => navigate(ROUTE_CONSTANTS.SETING_PAGE)}>
+                <SvgIcon fontSize="small">
+                  <CogIcon />
+                </SvgIcon>
+              </IconButton>
+            </Tooltip> */}
             <Avatar
               onClick={accountPopover.handleOpen}
               ref={accountPopover.anchorRef}
@@ -113,7 +107,6 @@ export const TopNav = (props) => {
         </Stack>
       </Box>
       <AccountPopover
-      account = {account}
         anchorEl={accountPopover.anchorRef.current}
         open={accountPopover.open}
         onClose={accountPopover.handleClose}

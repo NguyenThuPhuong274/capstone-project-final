@@ -9,7 +9,7 @@ const ErrorPage = () => {
 
   return (
     <>
-      <section className={`relative ${user.role_id === ROLE.ADMIN? "ml-[280px] lg:pt-[120px]" : "z-10 pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28"} `}>
+      <section className={`relative ${user?.role_id === ROLE.ADMIN? "ml-[280px] lg:pt-[120px]" : "z-10 pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28"} `}>
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">

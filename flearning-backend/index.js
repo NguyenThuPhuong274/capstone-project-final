@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from "cors";
 import routes from "./src/routes/routes.js";
 const app = express();
 // let cors = require("cors");
@@ -15,6 +16,7 @@ app.use((req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   next();
 });
+app.use(cors());
 
 routes(app);
 

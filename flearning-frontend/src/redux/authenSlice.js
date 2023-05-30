@@ -12,6 +12,10 @@ export const signup = createAsyncThunk("signup", async (user) => {
   const response = await authenServices.signup(user);
   return response;
 });
+export const changePassword = createAsyncThunk("change-password", async (user) => {
+  const response = await authenServices.changePassword(user);
+  return response;
+});
 
 export const forgotPassword = createAsyncThunk("forgot-password", async (email) => {
   const response = await authenServices.forgotPassword(email);
@@ -25,6 +29,7 @@ const authenSlice = createSlice({
   initialState: {
     user: null,
     token: null,
+    email: null,
     createAccountStatus: false,
   },
   reducers: {
@@ -48,26 +53,35 @@ const authenSlice = createSlice({
       const { user, accessToken } = action.payload;
       if (user == null) {
         const { message } = action.payload;
-        toast.success(message);
+        toast.warning(message);
       } else {
         state.user = user;
         state.token = accessToken;
         sessionStorage.setItem("token", accessToken);
         sessionStorage.setItem("user", JSON.stringify(user));
-        console.log("JSON.stringify(user)", JSON.stringify(user));
         localStorage.setItem("currentPage", "Trang chủ");
         toast.success("Đăng nhập thành công");
       }
-    })
-      .addCase(signup.fulfilled, (state, action) => {
-        if (action.payload.rowAffected === 1) {
-          // const { user, accessToken } = action.payload;
-          state.createAccountStatus = true;
-          // state.token = accessToken;
-        }
-        toast.success("Tạo tài khoản thành công");
-        console.log("create account successfully", action.payload);
-      });
+    }).addCase(signup.fulfilled, (state, action) => {
+      if (action.payload.rowAffected === 1) {
+        // const { user, accessToken } = action.payload;
+        state.createAccountStatus = true;
+        // state.token = accessToken;
+      }
+      toast.success("Tạo tài khoản thành công");
+      console.log("create account successfully", action.payload);
+    }).addCase(changePassword.fulfilled, (state, action) => {
+      toast.success("Thay đổi mật khẩu thành công");
+    }).addCase(forgotPassword.fulfilled, (state, action) => {
+      const { status, email } = action.payload;
+      if (status === true) {
+        state.email = email;
+        toast.success("Yêu cầu thành công");
+      } else {
+        toast.warning("Email không tồn tại");
+      }
+
+    });
   },
 });
 

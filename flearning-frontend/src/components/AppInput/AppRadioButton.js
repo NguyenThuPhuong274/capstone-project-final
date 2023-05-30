@@ -1,7 +1,6 @@
 import { useRef } from "react";
 
 const AppRadioButton = ({ value, handleChangeValue }) => {
- 
     return <>
         <div class="flex">
             <div class="inline-flex items-center">

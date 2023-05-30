@@ -25,34 +25,7 @@ export const FeedbackTable = (props) => {
     onRowsPerPageChange,
     page = 0,
     rowsPerPage = 0,
-    setIsOpenModal,
-    setCurrentContact,
-    isOpenModal
   } = props;
-
-  const [currentId, setCurrentId] = React.useState(null);
-
-  const handleContact = () => {
-    var feedback = items.find(item => item.feedback_id === currentId);
-    setCurrentContact(feedback);
-
-    // alert(currentId);
-    setIsOpenModal(true);
-  }
-
-  React.useEffect(() => {
-    if (currentId !== null) {
-      handleContact();
-    }
-  }, [currentId]);
-
-  React.useEffect(() => {
-    if (isOpenModal === false) {
-      setCurrentId(null);
-    }
-  }, [isOpenModal]);
-
-
 
   return (<>
     <Card sx={{ height: 450, boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;" }}   >
@@ -96,7 +69,7 @@ export const FeedbackTable = (props) => {
                         spacing={2}
                       >
 
-                        <Typography variant="subtitle2">
+                        <Typography sx={{width: 150}} variant="subtitle2">
                           {feedback?.name}
                         </Typography>
                       </Stack>
@@ -106,14 +79,16 @@ export const FeedbackTable = (props) => {
                       {feedback?.email}
                     </TableCell>
 
-                    <TableCell>
+                    <TableCell sx={{width: 150}}>
                       {feedback?.course_name}
                     </TableCell>
                     <TableCell>
                       {feedback?.star}
                     </TableCell>
                     <TableCell>
-                      {feedback?.message}
+                     <p style={{ whiteSpace: 'nowrap' }} className='overflow-auto w-[420px] '>
+                     {feedback?.message}
+                     </p>
                     </TableCell>
 
 

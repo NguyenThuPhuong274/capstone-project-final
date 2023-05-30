@@ -7,6 +7,10 @@ export const insertLesson = createAsyncThunk("insert-lesson", async (lesson) => 
     const response = await lessonServices.insertLesson(lesson);
     return response;
 });
+export const insertLessonDone = createAsyncThunk("insert-lesson-done", async (lesson) => {
+    const response = await lessonServices.insertLessonDone(lesson);
+    return response;
+});
 
 export const updateLesson = createAsyncThunk("update-lesson", async (lesson) => {
     const response = await lessonServices.updateLesson(lesson);
@@ -21,6 +25,10 @@ export const getLessons = createAsyncThunk("get-lessons", async () => {
     const response = await lessonServices.getLessons();
     return response;
 });
+export const getLessonsDone = createAsyncThunk("get-lessons-done", async (user) => {
+    const response = await lessonServices.getLessonsDone(user);
+    return response;
+});
 
 
 
@@ -30,6 +38,7 @@ const lessonSlice = createSlice({
     initialState: {
         response_status: false,
         data: [],
+        lessons_done: [],
         isRefresh: false
     },
     reducers: {
@@ -48,6 +57,9 @@ const lessonSlice = createSlice({
             state.isRefresh = true;
             toast.success("Thêm bài học thành công");
         });
+        builder.addCase(insertLessonDone.fulfilled, (state, action) => {
+            console.log("Thêm bài học xong");
+        });
         builder.addCase(deleteLesson.fulfilled, (state, action) => {
             state.isRefresh = true;
             toast.success("Xóa bài học thành công");
@@ -55,6 +67,10 @@ const lessonSlice = createSlice({
         builder.addCase(getLessons.fulfilled, (state, action) => {
             state.data = action.payload;
             state.isRefresh = false;
+        });
+        builder.addCase(getLessonsDone.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.lessons_done = action.payload;
         });
     },
 });

@@ -1,9 +1,7 @@
-import { format } from 'date-fns';
 import React from 'react';
 import {
   Box,
   Card,
-  Checkbox,
   Stack,
   Table,
   TableBody,
@@ -13,9 +11,12 @@ import {
   TableRow,
   Button,
   Chip,
-  Typography
+  Typography,
+  SvgIcon
 } from '@mui/material';
+import ReplyIcon from '@mui/icons-material/Reply';
 import { Scrollbar } from '../../components/ScrollBar';
+import PencilIcon from '@heroicons/react/24/solid/PencilIcon';
 
 export const ContactTable = (props) => {
   const {
@@ -74,6 +75,9 @@ export const ContactTable = (props) => {
                 </TableCell>
 
                 <TableCell>
+                  Nội dung
+                </TableCell>
+                <TableCell>
                   Trạng thái
                 </TableCell>
 
@@ -100,28 +104,40 @@ export const ContactTable = (props) => {
                       >
 
                         <Typography variant="subtitle2">
-                          {contact?.name}
+                          <p style={{ whiteSpace: "nowrap", width: 170, overflow: "auto" }} >
+                            {contact?.name}
+                          </p>
+
                         </Typography>
                       </Stack>
                     </TableCell>
 
                     <TableCell>
-                      {contact?.email}
+                      <p style={{ whiteSpace: "nowrap", width: 220, overflow: "auto" }} >
+                        {contact?.email}
+                      </p>
+
                     </TableCell>
 
                     <TableCell>
                       {new Date(contact?.request_date).toLocaleDateString()}
                     </TableCell>
-
+                    <TableCell>
+                      <p style={{ whiteSpace: "nowrap", width: 260, overflow: "auto" }} >
+                        {contact?.request_message}
+                      </p>
+                    </TableCell>
                     <TableCell>
                       <Chip color={contact?.status === true ? 'secondary' : 'error'} label={contact?.status === true ? 'Đã phản hồi' : 'Chưa phản hồi'} />
                     </TableCell>
                     <TableCell>
-                      <Button onClick={() => setCurrentId(contact?.contact_id)} variant="contained" className='bg-primary ' size='small'>
-                        {contact?.status === true ? 'Chỉnh sửa' : 'Phản hồi'}
+                      <Button size="small" sx={{ width: 140 }} onClick={() => setCurrentId(contact?.contact_id)} variant="contained" className='bg-primary '>
+
+                        <SvgIcon sx={{ mr: 1 }}>
+                          {contact?.status === true ? <PencilIcon /> : <ReplyIcon />}
+                        </SvgIcon>  {contact?.status === true ? 'Chỉnh sửa' : 'Phản hồi'}
+
                       </Button>
-
-
                     </TableCell>
                   </TableRow>
                 );

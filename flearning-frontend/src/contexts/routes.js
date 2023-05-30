@@ -1,6 +1,6 @@
- 
+
 import { ROUTE_CONSTANTS } from "../constants/route.constants";
-import {HomePage} from "../pages";
+import { HomePage } from "../pages";
 import SigninPage from "../pages/signin";
 import SignupPage from "../pages/signup";
 import ForgotPasswordPage from "../pages/forgot-password";
@@ -21,6 +21,15 @@ import BlogDetailsPage from "../pages/blog-details";
 import AdminFeedbackPage from "../pages/admin/feedback";
 import AdminSupportPage from "../pages/admin/support";
 import SettingPage from "../pages/admin/settings";
+import AdminTestPage from "../pages/admin/test";
+import AdminTestDetailsPage from "../pages/admin/test-details";
+import ChangePasswordPage from "../pages/change-password";
+import AdminBlogDetailsPage from "../pages/admin/blog-details";
+import PaymentPage from "../pages/user/payment";
+import PaymentResultPage from "../pages/user/payment/PaymentResultPage";
+import PaymentHistoryPage from "../pages/payment-history";
+import AdminInvoicePage from "../pages/admin/invoice";
+import NewPasswordPage from "../pages/create-new-password";
 
 export const routes = [
   {
@@ -30,26 +39,62 @@ export const routes = [
     exact: true,
   },
   {
+    path: ROUTE_CONSTANTS.NEW_PASSWORD_PAGE,
+    isPrivate: false,
+    component: <NewPasswordPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.CHANGE_PASSWORD_PAGE,
+    isPrivate: true,
+    component: <ChangePasswordPage />,
+    exact: true,
+  },
+  {
     path: ROUTE_CONSTANTS.BLOG_DETAILS_PAGE,
     isPrivate: false,
     component: <BlogDetailsPage />,
     exact: true,
   },
   {
+    path: ROUTE_CONSTANTS.ADMIN_TEST_PAGE,
+    isPrivate: true,
+    component: <AdminTestPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.PAYMENT_HISTORY,
+    isPrivate: true,
+    component: <PaymentHistoryPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_TEST_DETAILS,
+    isPrivate: true,
+    component: <AdminTestDetailsPage />,
+    exact: true,
+  },
+  {
     path: ROUTE_CONSTANTS.SETING_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <SettingPage />,
     exact: true,
   },
   {
+    path: ROUTE_CONSTANTS.PAYMENT,
+    isPrivate: true,
+    component: <PaymentPage />,
+    exact: true,
+  },
+  {
     path: ROUTE_CONSTANTS.ADMIN_FEEDBACK_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminFeedbackPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_SUPPORT_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminSupportPage />,
     exact: true,
   },
@@ -61,26 +106,38 @@ export const routes = [
   },
   {
     path: ROUTE_CONSTANTS.COURSE_DETAILS_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <CourseDetailPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.LESSON_VIEW_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <LessonViewPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.MY_COURSE_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <MyCoursePage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ACCOUNT_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AccountPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.PAYMENT_RESULT_PAGE,
+    isPrivate: true,
+    component: <PaymentResultPage />,
+    exact: true,
+  },
+  {
+    path: ROUTE_CONSTANTS.ADMIN_INVOICE_PAGE,
+    isPrivate: true,
+    component: <AdminInvoicePage />,
     exact: true,
   },
   {
@@ -97,25 +154,31 @@ export const routes = [
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_BLOG_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminBlogPage />,
     exact: true,
   },
   {
+    path: ROUTE_CONSTANTS.ADMIN_BLOG_DETAILS_PAGE,
+    isPrivate: true,
+    component: <AdminBlogDetailsPage />,
+    exact: true,
+  },
+  {
     path: ROUTE_CONSTANTS.ADMIN_COURSE_DETAILS,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminCourseDetailsPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_COURSE_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminCoursesPage />,
     exact: true,
   },
   {
     path: ROUTE_CONSTANTS.ADMIN_CONTACT_PAGE,
-    isPrivate: false,
+    isPrivate: true,
     component: <AdminContactPage />,
     exact: true,
   },

@@ -13,7 +13,7 @@ const AppDatePicker = ({ value, title, handleChangeValue, placeholder }) => {
     };
 
     const years = [];
-    for (let x = 2020; x >= 1950; x--) {
+    for (let x = 2020; x >= 1990; x--) {
         years.push(x);
     }
 
@@ -24,7 +24,7 @@ const AppDatePicker = ({ value, title, handleChangeValue, placeholder }) => {
         <Button
             onClick={handleClick}
             sx={{ fontStyle: "normal" }}
-            color='primary' variant="contained" className=' w-full' >
+            color='info' variant="contained" className=' w-full' >
             {value ? "Năm sinh: " + value : "Chọn năm sinh"}
         </Button>
         <Popover

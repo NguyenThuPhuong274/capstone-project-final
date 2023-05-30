@@ -7,27 +7,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
 import GoogleLogin from 'react-google-login';
 import { Link, useNavigate } from "react-router-dom";
+import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
+import { validateEmail } from "../../helpers/validation";
 
 
 const SigninPage = () => {
   const dispatch = useDispatch();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isRemember, setIsRemember] = React.useState(false);
   const user = useSelector((state) => state.authen.user);
   const { signOut } = authenSlice.actions;
 
-  if(user != null ) {
+  if (user != null) {
     navigate(ROUTE_CONSTANTS.HOME_PAGE);
   }
 
   const handleSignIn = () => {
-    if(email == "" || password == "") {
+    if (email == "" || password == "") {
       toast.warning('Nhập tài khoản và mật khẩu của bạn!');
-    } else {
-      dispatch(signin({ email: email, password: password, isRemember: isRemember }));
+      return;
     }
+
+    if (validateEmail(email) === false && email !== 'admin') {
+      toast.warning('Email không hợp lệ!');
+      return;
+    }
+    dispatch(signin({ email: email, password: password, isRemember: isRemember }));
+
   };
 
   const responseGoogle = (response) => {
@@ -41,37 +49,39 @@ const navigate = useNavigate();
     } else {
       // toast.error('Không thể đăng nhập bằng Google');
     }
-   
+
     console.log(error);
   }
 
   return (
     <>
+      <SmoothScrollUp />
+
       <section className="relative z-10 overflow-hidden pt-36 pb-16 md:pb-20 lg:pt-[180px] lg:pb-28">
         <div className="container">
-       
+
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full px-4">
               <div className="mx-auto max-w-[500px] rounded-md bg-primary bg-opacity-5 py-10 px-6 dark:bg-dark sm:p-[60px]">
                 <h3 className="mb-3 text-center text-2xl font-bold text-black dark:text-white sm:text-3xl">
-                {SIGNIN_CONSTANTS.SIGN_IN_TITLE}
+                  {SIGNIN_CONSTANTS.SIGN_IN_TITLE}
                 </h3>
                 <p className="mb-11 text-center text-base font-medium text-body-color">
-               {SIGNIN_CONSTANTS.SIGN_IN_MESSAGE}
+                  {SIGNIN_CONSTANTS.SIGN_IN_MESSAGE}
                 </p>
                 <div className="mb-6 flex w-full items-center justify-center">
-                 <GoogleLogin
-                  clientId={APP_CONSTANTS.GOOGLE_CLIENT_ID}
-                  buttonText="Đăng nhập bằng Google"
-                  onSuccess={responseGoogle}
-                  onFailure={onFailure}
-                  cookiePolicy={'single_host_origin'}
-                />
+                  <GoogleLogin
+                    clientId={APP_CONSTANTS.GOOGLE_CLIENT_ID}
+                    buttonText="Đăng nhập bằng Google"
+                    onSuccess={responseGoogle}
+                    onFailure={onFailure}
+                    cookiePolicy={'single_host_origin'}
+                  />
                 </div>
                 <div className="mb-8 flex items-center justify-center">
                   <span className="hidden h-[1px] w-full max-w-[70px] bg-body-color sm:block"></span>
                   <p className="w-full px-4 text-center text-base font-medium text-body-color">
-                   {SIGNIN_CONSTANTS.OR}
+                    {SIGNIN_CONSTANTS.OR}
                   </p>
                   <span className="hidden h-[1px] w-full max-w-[50px] bg-body-color sm:block"></span>
                 </div>
@@ -81,7 +91,7 @@ const navigate = useNavigate();
                       htmlFor="email"
                       className="mb-3 block text-sm font-medium text-dark dark:text-white"
                     >
-                     {APP_CONSTANTS.EMAIL}
+                      {APP_CONSTANTS.EMAIL}
                     </label>
                     <input
                       type="email"
@@ -152,14 +162,14 @@ const navigate = useNavigate();
                   </div>
                   <div className="mb-6">
                     <button
-                    onClick={handleSignIn}
-                    className="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
+                      onClick={handleSignIn}
+                      className="flex w-full items-center justify-center rounded-md bg-primary py-4 px-9 text-base font-medium text-white transition duration-300 ease-in-out hover:bg-opacity-80 hover:shadow-signUp">
                       {SIGNIN_CONSTANTS.SIGN_IN_TITLE}
                     </button>
                   </div>
                 </div>
                 <p className="text-center text-base font-medium  text-body-color">
-                  {SIGNIN_CONSTANTS.DONT_HAVE_ACCOUNT} 
+                  {SIGNIN_CONSTANTS.DONT_HAVE_ACCOUNT}
                   <Link to={ROUTE_CONSTANTS.SIGN_UP} className="ml-1 text-primary hover:underline">
                     {SIGNUP_CONSTANTS.SIGN_UP_TITLE}
                   </Link>

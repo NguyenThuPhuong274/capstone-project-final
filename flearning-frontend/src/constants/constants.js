@@ -40,9 +40,9 @@ export const CONTACT_INFORMATIONS = {
     CONTENT_2A: "Từ thứ Hai đến thứ Bảy hàng tuần",
     CONTENT_2B: "Sáng 8h00 - 12h00, Chiều 13h00 - 17h00",
     HEADER_3: "THÔNG TIN LIÊN HỆ:",
-    CONTENT_3A: "Đào Thanh Lam",
-    CONTENT_3B: "Phố Xuân Đỗ, Phường Cự Khối, Quận Long Biên, Hà Nội",
-    CONTENT_3C: "HOTLINE : 037 223 2268"
+    CONTENT_3A: "Nguyễn Thu Phương",
+    CONTENT_3B: "201 Cầu Giấy, Hà Nội",
+    CONTENT_3C: "HOTLINE : 097 120 4291"
 
 }
 

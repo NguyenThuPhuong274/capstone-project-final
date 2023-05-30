@@ -11,6 +11,12 @@ import feedbackSlice from "./feedbackSlice";
 import supportSlice from "./supportSlice";
 import chapterSlice from "./chapterSlice";
 import lessonSlice from "./lessonSlice";
+import testSlice from "./testSlice";
+import questionSlice from "./questionSlice";
+import blogCategorySlice from "./blogCategorySlice";
+import blogDetailSlice from "./blogDetailSlice";
+import paymentSlice from "./paymentSlice";
+import dashboardSlice from "./dashboardSlice";
 
 const persistConfig = {
   key: "root",
@@ -27,6 +33,12 @@ const rootReducers = combineReducers({
   support: supportSlice.reducer,
   chapter: chapterSlice.reducer,
   lesson: lessonSlice.reducer,
+  test: testSlice.reducer,
+  question: questionSlice.reducer,
+  blogCategory: blogCategorySlice.reducer,
+  blogDetails : blogDetailSlice.reducer,
+  payment : paymentSlice.reducer,
+  dashboard : dashboardSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
