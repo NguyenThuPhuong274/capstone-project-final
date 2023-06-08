@@ -18,6 +18,10 @@ import axios from "axios";
     const response = await axios.get(API.MANAGE_PAYMENT + "/get");
     return response.data;
   },
+  sendInvoice: async (invoice) => {
+    const response = await axios.post(API.MAIL + "/send-invoice", invoice);
+    return response.data;
+  },
  
 };
 

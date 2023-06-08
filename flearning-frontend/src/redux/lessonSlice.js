@@ -58,6 +58,7 @@ const lessonSlice = createSlice({
             toast.success("Thêm bài học thành công");
         });
         builder.addCase(insertLessonDone.fulfilled, (state, action) => {
+            state.isRefresh = true;
             console.log("Thêm bài học xong");
         });
         builder.addCase(deleteLesson.fulfilled, (state, action) => {
@@ -70,6 +71,7 @@ const lessonSlice = createSlice({
         });
         builder.addCase(getLessonsDone.fulfilled, (state, action) => {
             console.log(action.payload);
+            state.isRefresh = false;
             state.lessons_done = action.payload;
         });
     },

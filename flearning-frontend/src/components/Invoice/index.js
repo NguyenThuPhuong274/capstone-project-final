@@ -42,6 +42,8 @@ const Invoice = ({ course }) => {
         email: user?.email,
         course_id: course?.course_id,
         course_name: course?.course_name,
+        course_avatar_url: course?.course_avatar_url,
+        duration: course?.duration,
         price: course?.price,
         created_date: new Date(),
     });
@@ -55,6 +57,8 @@ const Invoice = ({ course }) => {
             email: user?.email,
             course_id: course?.course_id,
             course_name: course?.course_name,
+            duration: course?.duration,
+            course_avatar_url: course?.course_avatar_url,
             price: course?.price,
             created_date: new Date(),
         });
@@ -188,6 +192,9 @@ const Invoice = ({ course }) => {
                                             <div>{getTotalLesson() + " bài học"}</div>
                                         </Stack>
                                     </Typography>
+                                    <Typography>
+                                    Nhà cung cấp: <span className="font-bold">  JLearning Website</span>
+                                    </Typography>
                                 </Stack>
                             </div>
 
@@ -199,7 +206,7 @@ const Invoice = ({ course }) => {
                         >
                             <Card sx={{ ml: 3, pt: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;' }} >
 
-                                <CardContent className='h-[394px]' sx={{ pb: 5 }} >
+                                <CardContent className='h-[430px]' sx={{ pb: 5 }} >
                                     <CardHeader title="Thông tin cá nhân" />
                                     <Stack direction={"column"} spacing={2}>
                                         <Stack direction={"row"} spacing={2} className='w-full'>
@@ -213,7 +220,7 @@ const Invoice = ({ course }) => {
                                         </Stack>
 
                                         <Stack direction={"row"} spacing={2}>
-                                            <AppTextArea height={"h-[180px]"} value={values.address} title={"address"} handleChangeValue={handleChangeValue} placeholder={"Địa chỉ"} />
+                                            <AppTextArea height={"h-[210px]"} value={values.address} title={"address"} handleChangeValue={handleChangeValue} placeholder={"Địa chỉ"} />
 
                                         </Stack>
                                     </Stack>

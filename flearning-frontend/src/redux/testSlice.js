@@ -80,6 +80,8 @@ const testSlice = createSlice({
     });
     builder.addCase(getTestsDone.fulfilled, (state, action) => {
       state.tests_done = action.payload;
+      state.isRefresh = false;
+
     });
   },
 });

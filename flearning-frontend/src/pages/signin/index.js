@@ -5,7 +5,7 @@ import authenSlice, { signin } from "../../redux/authenSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from 'react-toastify';
-import GoogleLogin from 'react-google-login';
+// import GoogleLogin from 'react-google-login';
 import { Link, useNavigate } from "react-router-dom";
 import SmoothScrollUp from "../../components/Common/SmoothScrollUp";
 import { validateEmail } from "../../helpers/validation";
@@ -69,7 +69,7 @@ const SigninPage = () => {
                 <p className="mb-11 text-center text-base font-medium text-body-color">
                   {SIGNIN_CONSTANTS.SIGN_IN_MESSAGE}
                 </p>
-                <div className="mb-6 flex w-full items-center justify-center">
+                {/* <div className="mb-6 flex w-full items-center justify-center">
                   <GoogleLogin
                     clientId={APP_CONSTANTS.GOOGLE_CLIENT_ID}
                     buttonText="Đăng nhập bằng Google"
@@ -77,7 +77,7 @@ const SigninPage = () => {
                     onFailure={onFailure}
                     cookiePolicy={'single_host_origin'}
                   />
-                </div>
+                </div> */}
                 <div className="mb-8 flex items-center justify-center">
                   <span className="hidden h-[1px] w-full max-w-[70px] bg-body-color sm:block"></span>
                   <p className="w-full px-4 text-center text-base font-medium text-body-color">

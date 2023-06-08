@@ -96,19 +96,28 @@ const TestController = {
     },
     insertTestDone: async (req, res) => {
         const test = req.body;
-        // console.log("test is being inserted", test);
-        let queryString = `INSERT INTO [dbo].[Test_Done]
-                            ([test_id]
+        console.log(req.body);
+    
+        let queryString = `SELECT [test_id] FROM [dbo].[Test_Done]
+        WHERE [email] = '${test.email}' AND [course_id] = '${test.course_id}' AND [test_id] = '${test.test_id}'`;
+        let data = await executeQuery(queryString);
+        if (data.length > 0) return res.json("ok");
+    
+        queryString = `INSERT INTO [dbo].[Test_Done]
+                             ([test_id]
                               ,[email]
                               ,[course_id])
-                        VALUES
-                            ('${test.test_id}'
+                              VALUES
+                              ('${test.test_id}'
                               ,'${test.email}'
                               ,'${test.course_id}')`;
-        const data = await executeNonQuery(queryString);
-        // console.log(data);
-
-        return res.json({ test: test, rowAffected: data });
+        data = await executeNonQuery(queryString);
+    
+        console.log(data);
+    
+        return res.json({
+          rowAffected: data,
+        });
     },
     updateTest: async (req, res) => {
         const test = req.body;
@@ -146,7 +155,7 @@ const TestController = {
     getTestsDone: async (req, res) => {
         const user = req.body;
 
-        // console.log(user);
+        console.log(user);
         const queryString = `SELECT [test_id] FROM [dbo].[Test_Done]
                                     WHERE [email] = '${user.email}'
                                     AND [course_id] = '${user.course_id}'`;
@@ -155,7 +164,7 @@ const TestController = {
         for (let i = 0; i < data.length; i++) {
             ids.push(data[i].test_id);
         }
-        // console.log("test id: ", ids);
+        console.log("test id: ", ids);
 
         return res.json(ids);
     }

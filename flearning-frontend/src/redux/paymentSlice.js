@@ -19,6 +19,10 @@ export const getAllPayments = createAsyncThunk("get-all-payment", async () => {
     const response = await paymentServices.getAllPayments();
     return response;
 });
+export const sendInvoice = createAsyncThunk("get-all-payment", async (invoice) => {
+    const response = await paymentServices.sendInvoice(invoice);
+    return response;
+});
 
 
 const paymentSlice = createSlice({

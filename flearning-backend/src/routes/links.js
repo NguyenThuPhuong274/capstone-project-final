@@ -270,6 +270,11 @@ export const Links = [
     handleAction: MailController.sendMail,
   },
   {
+    route: CONSTANT_ROUTE.MAIL + "/send-invoice",
+    method: "post",
+    handleAction: MailController.sendInvoice,
+  },
+  {
     route: CONSTANT_ROUTE.MAIL + "/send/forgot-password",
     method: "post",
     handleAction: MailController.sendMailForgotPassword,

@@ -22,10 +22,10 @@ const ListPayment = ({ data, user, courses }) => {
 
    
 
-    React.useEffect(() => {
-        setPayments(data);
-        setPaymentsPagination(data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage));
-    }, [data])
+    // React.useEffect(() => {
+    //     setPayments(data);
+    //     setPaymentsPagination(data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)); 
+    // }, [data])
 
 
     const [currentPayment, setCurrentPayment] = React.useState(null);

@@ -18,12 +18,13 @@ const DashboardController = {
         data = await executeQuery(queryString);
         const totalUser = data[0].total;
 
-        // get total user
+        // get total amount
         queryString = `SELECT SUM(amount) AS [total] FROM [Payment]`;
         data = await executeQuery(queryString);
         const totalAmount = data[0].total;
 
         // get top 10 lasted order
+        // 
         queryString = `SELECT TOP(10) * FROM [Payment] ORDER BY [created_date] DESC`;
         data = await executeQuery(queryString);
         const topOrders = data;

@@ -53,42 +53,50 @@ const LessonController = {
     // console.log("rowAffected: ", data);
     return res.json({
       rowAffected: data,
-    })
+    });
   },
   insertLessonDone: async (req, res) => {
     const lesson = req.body;
-    // console.log(req.body);
+    console.log(req.body);
 
-    let queryString = `INSERT INTO [dbo].[Lesson_Done]
-                          ([lesson_id]
+    let queryString = `SELECT [lesson_id] FROM [dbo].[Lesson_Done]
+    WHERE [email] = '${lesson.email}' AND [course_id] = '${lesson.course_id}' AND [lesson_id] = '${lesson.lesson_id}'`;
+    let data = await executeQuery(queryString);
+    if (data.length > 0) return res.json("ok");
+
+    queryString = `INSERT INTO [dbo].[Lesson_Done]
+                         ([lesson_id]
                           ,[email]
                           ,[course_id])
-                      VALUES
+                          VALUES
                           ('${lesson.lesson_id}'
                           ,'${lesson.email}'
                           ,'${lesson.course_id}')`;
-    let data = await executeNonQuery(queryString);
+    data = await executeNonQuery(queryString);
 
+    console.log(data);
 
     return res.json({
       rowAffected: data,
-    })
+    });
   },
   getLessonsDone: async (req, res) => {
     const user = req.body;
-    
+
+    console.log(user);
+
     const queryString = `SELECT [lesson_id] FROM [dbo].[Lesson_Done]
                              WHERE [email] = '${user.email}' AND [course_id] = '${user.course_id}'`;
-    const data = await executeQuery(queryString);
-    
+    let data = await executeQuery(queryString);
+
     let ids = [];
     for (let i = 0; i < data.length; i++) {
       ids.push(data[i].lesson_id);
     }
-    
-    // console.log(ids);
+
+    console.log(ids);
     return res.json(ids);
-  }
+  },
 };
 
 export default LessonController;

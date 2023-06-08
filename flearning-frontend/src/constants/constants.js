@@ -52,7 +52,7 @@ export const SIGNIN_CONSTANTS = {
     SIGN_IN_GOOGLE: "Đăng nhập bằng tài khoản Google",
     SIGN_IN_EMAIL: "Nhập email của bạn",
     SIGN_IN_PASSWORD: "Nhập mật khẩu của bạn",
-    OR: "Hoặc đăng nhập bằng email",
+    // OR: "Hoặc đăng nhập bằng email",
     FORGOT_PASSOWRD: "Quên mật khẩu?",
     REMEMBER_ME: "Ghi nhớ tài khoản",
     DONT_HAVE_ACCOUNT: "Bạn không có tài khoản?",
@@ -66,7 +66,7 @@ export const SIGNUP_CONSTANTS = {
     SIGN_UP_EMAIL: "Nhập email của bạn",
     SIGN_UP_PASSWORD: "Nhập mật khẩu của bạn",
     SIGN_UP_FULLNAME: "Nhập tên đầy đủ của bạn",
-    OR: "Hoặc đăng ký bằng email",
+    // OR: "Hoặc đăng ký bằng email",
     FULLNAME: "Tên đầy đủ",
 
     SIGN_UP_PASSWORD_CONFIRM: "Nhập lại mật khẩu của bạn",

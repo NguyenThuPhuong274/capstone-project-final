@@ -97,7 +97,12 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 
-const LessonDetails = ({ course, lessonsDone, testsDone, user, feedback }) => {
+const LessonDetails = ({user }) => {
+    const course = useSelector((state) => state.course.specific);
+    const feedback = useSelector((state) => state.feedback.specific);
+    const lessonsDone = useSelector((state) => state.lesson.lessons_done);
+    const testsDone = useSelector((state) => state.test.tests_done);
+    // console.log("test: ", testsDone);
     const dispatch = useDispatch();
     const [expanded, setExpanded] = React.useState('panel1');
     const [currentLesson, setCurrentLesson] = React.useState(course?.chapters[0]?.lessons[0]);

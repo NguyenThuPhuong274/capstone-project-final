@@ -83,7 +83,7 @@ const AdminCourseDetails = ({ course }) => {
         }
 
         if (values.duration.trim() === '' || parseInt(values.duration.trim()) === 0) {
-            toast.warning("Chưa thời gian học");
+            toast.warning("Chưa nhập thời gian học");
             return;
         }
         if (values.price.trim() === '') {

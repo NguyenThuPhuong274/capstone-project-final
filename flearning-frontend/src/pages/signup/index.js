@@ -79,7 +79,7 @@ const SignupPage = () => {
                 <p className="mb-11 text-center text-base font-medium text-body-color">
                   {SIGNUP_CONSTANTS.SIGN_UP_MESSAGE}
                 </p>
-                <div className="mb-6 flex w-full items-center justify-center">
+                {/* <div className="mb-6 flex w-full items-center justify-center">
                   <GoogleLogin
                     clientId={APP_CONSTANTS.GOOGLE_CLIENT_ID}
                     buttonText="Đăng ký bằng Google"
@@ -87,12 +87,12 @@ const SignupPage = () => {
                     onFailure={onFailure}
                     cookiePolicy={'single_host_origin'}
                   />
-                </div>
+                </div> */}
                 <div className="mb-8 flex items-center justify-center">
                   <span className="hidden h-[1px] w-full max-w-[60px] bg-body-color sm:block"></span>
-                  <p className="w-full px-5 text-center text-base font-medium text-body-color">
+                  {/* <p className="w-full px-5 text-center text-base font-medium text-body-color">
                     {SIGNUP_CONSTANTS.OR}
-                  </p>
+                  </p> */}
                   <span className="hidden h-[1px] w-full max-w-[60px] bg-body-color sm:block"></span>
                 </div>
                 <div>

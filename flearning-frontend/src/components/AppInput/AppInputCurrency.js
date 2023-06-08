@@ -1,10 +1,9 @@
 
 const AppInputCurrency = ({disabled,placeholder, value, handleChangeValue, title, height }) => {
 
-    
 
     const handleInputChange = (e) => {
-        let inputValue = e.target.value;
+        let inputValue = e.target?.value;
         const numericValue = inputValue.replace(/[^0-9]/g, ''); // Remove non-numeric characters
 
         const formattedValue = new Intl.NumberFormat('vi-VN').format(Number(numericValue)) + '₫';
@@ -16,7 +15,7 @@ const AppInputCurrency = ({disabled,placeholder, value, handleChangeValue, title
           <input
             className={`peer ${height} h-full  w-full rounded-[7px] border border-blue-gray-200  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-blue-500 focus:border-t-transparent focus:outline-0 disabled:border-2 disabled:border-blue-500 disabled:border-t-transparent disabled:outline-0 `}
             placeholder=" "
-            value={value.includes("₫") ? value : new Intl.NumberFormat('vi-VN').format(Number(value)) + '₫'}
+            value={value ? (value?.includes("₫") ? value : new Intl.NumberFormat('vi-VN').format(Number(value)) + '₫') : ""}
             disabled={disabled}
             onChange={handleInputChange}
           />
