@@ -94,7 +94,7 @@ const PaymentController = {
         res.json(data);
     },
     getAllPayments: async (req, res) => {
-        const querystring = `SELECT * FROM [Payment]`;
+        const querystring = `SELECT * FROM [Payment] ORDER BY [created_date] DESC`;
         const data = await executeQuery(querystring);
         res.json(data);
     }

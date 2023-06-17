@@ -112,7 +112,7 @@ const CourseController = {
   insertCourse: async (req, res) => {
     const course = req.body;
     // console.log("course is being inserted", course);
-    const price = parseFloat(course.price.replace("₫", "").replace(".", ""));
+    const price = parseFloat(course.price.replace(/\./g, "").replace("₫", ""));
     // console.log(price);
     const duration = parseInt(course.duration);
     let queryString = `INSERT INTO [dbo].[Course]

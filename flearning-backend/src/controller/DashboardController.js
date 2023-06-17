@@ -29,10 +29,13 @@ const DashboardController = {
         data = await executeQuery(queryString);
         const topOrders = data;
 
-        queryString = `SELECT C.course_name, SUM(P.amount) AS total_amount
-                    FROM [Payment] AS P
-                    JOIN [Course] AS C ON P.course_id = C.course_id
-                    GROUP BY C.course_name;`;
+        queryString = `SELECT C.course_name, 
+                            Year(P.created_date) as [year],
+                            SUM(P.amount) AS total_amount
+                        FROM [Payment] AS P
+                        JOIN [Course] AS C ON P.course_id = C.course_id
+                        GROUP BY C.course_name
+                                ,Year(P.created_date)`;
         data = await executeQuery(queryString);
         const totalMoneyByCourse = data;
         

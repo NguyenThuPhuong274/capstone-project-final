@@ -62,7 +62,7 @@ const ListContact = ({ data }) => {
     }
 
     React.useEffect(() => {
-        const result = data.filter((contact) => contact.name.toLowerCase().includes(searchTerm.value.toLowerCase()));
+        const result = data.filter((contact) => contact.request_date.toLowerCase().includes(searchTerm.value.toLowerCase()));
         setContacts(result);
         setPage(0);
         setRowsPerPage(5);

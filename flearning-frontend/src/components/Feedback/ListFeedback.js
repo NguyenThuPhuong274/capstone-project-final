@@ -51,7 +51,7 @@ const ListFeedback = ({ data }) => {
     );
 
     React.useEffect(() => {
-        const result = data.filter((feedback) => feedback?.name.toLowerCase().includes(searchTerm.value.toLowerCase()));
+        const result = data.filter((feedback) => feedback?.course_name.toLowerCase().includes(searchTerm.value.toLowerCase()));
         setFeedbacks(result);
         setPage(0);
         setRowsPerPage(5);

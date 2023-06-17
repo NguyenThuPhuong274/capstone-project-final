@@ -80,7 +80,7 @@ const ListInvoice = ({ data, user, courses }) => {
     );
 
     React.useEffect(() => {
-        const result = data?.filter((invoice) => invoice?.course_name?.toLowerCase().includes(searchTerm?.value.toLowerCase()));
+        const result = data?.filter((invoice) => invoice?.created_date?.toLowerCase().includes(searchTerm?.value.toLowerCase()));
         setInvoices(result);
         setPage(0);
         setRowsPerPage(5);
